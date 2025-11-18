@@ -47,7 +47,7 @@ def lambda_handler(event, context):
 
     # Guardar en DynamoDB
     dynamodb = boto3.resource('dynamodb')
-    table_db = dynamodb.Table('TablaWebScrapping')
+    table_db = dynamodb.Table('WebScrappingSismos')
 
     # Limpiar tabla antes de insertar
     scan = table_db.scan()
