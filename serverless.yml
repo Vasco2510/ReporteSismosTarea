@@ -1,0 +1,38 @@
+org: ieeeutec
+service: api-web-scraping
+
+provider:
+  name: aws
+  runtime: python3.13
+  # Default memory size for functions (default: 1024MB)
+  memorySize: 1024 # Un giga básicamente
+  timeout: 20
+  iam:
+    role: arn:aws:iam::197934125902:role/LabRole
+
+functions:
+  scrape_table:
+    handler: scrap_sismos.lambda_handler # Asegúrarse de que el nombre del archivo y la función coincidan
+    package:
+      include:
+        - ./** # Incluir todo el contenido del directorio (sube al lambda memory todas las lib)
+    events:
+      - http:
+          path: /scrape/table
+          method: get
+          cors: true
+          integration: lambda
+
+resources:
+  Resources:
+    TablaWebScrapping:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: WebScrappingSismos
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
