@@ -12,7 +12,7 @@ provider:
 
 functions:
   scrape_table:
-    handler: scrap_sismos.lambda_handler # Asegúrarse de que el nombre del archivo y la función coincidan
+    handler: scrape_sismos.lambda_handler # Asegúrarse de que el nombre del archivo y la función coincidan
     package:
       include:
         - ./** # Incluir todo el contenido del directorio (sube al lambda memory todas las lib)
