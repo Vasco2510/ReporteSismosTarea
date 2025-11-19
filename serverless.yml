@@ -22,8 +22,6 @@ functions:
           method: get
           cors: true
           integration: lambda
-plugins:
-  - serverless-python-requirements
 
 resources:
   Resources:
