@@ -6,7 +6,7 @@ provider:
   runtime: python3.13
   # Default memory size for functions (default: 1024MB)
   memorySize: 1024 # Un giga básicamente
-  timeout: 20
+  timeout: 30
   iam:
     role: arn:aws:iam::197934125902:role/LabRole
 
@@ -22,13 +22,15 @@ functions:
           method: get
           cors: true
           integration: lambda
+plugins:
+  - serverless-python-requirements
 
 resources:
   Resources:
     TablaWebScrapping:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: WebScrappingSismos
+        TableName: RimacFans
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
